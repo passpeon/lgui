@@ -1,12 +1,13 @@
-local class = require(... .. "libs/class")
-local Element = require(... .. "elements/element")
+local class = require(LGUI_BASE_PATH .. ".libs.class")
+
+local Element = require(LGUI_BASE_PATH .. ".elements.element")
 
 local Window = class(Element, function(self, gui)
-    self.init(gui)
+    Element.init(self, gui)
 end)
 
 function Window:draw()
-    local posX, posY = self.getPosition(true)
+    local posX, posY = self:getPosition(true)
     self.gui.renderer.rectangle("fill", posX, posY, self.width, self.height, 0, 0)
 end
 

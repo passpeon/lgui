@@ -1,4 +1,4 @@
-local class = require(... .. "libs/class")
+local class = require(LGUI_BASE_PATH .. ".libs.class")
 
 local Element = class(function(self, gui)
     self.gui = gui

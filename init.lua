@@ -1,8 +1,8 @@
 local GUI = {}
 GUI._elements = {}
 
-local Renderer
-local Window = require(... .. "elements/window")
+LGUI_BASE_PATH = ...
+local Window = require(... .. ".elements.window")
 
 GUI.create = function(type)
     if type == "window" then
@@ -17,7 +17,7 @@ GUI.draw = function()
 end
 
 GUI.setRenderer = function(renderer)
-    Renderer = renderer
+    GUI.renderer = renderer
 end
 
 return GUI

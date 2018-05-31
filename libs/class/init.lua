@@ -10,7 +10,7 @@ local function class(base, init)
         for i,v in pairs(base) do
             c[i] = v
         end
-        c._base = base
+        c.super = base
     end
     -- the class will be the metatable for all its objects,
     -- and they will look up their methods in it.
@@ -36,7 +36,7 @@ local function class(base, init)
         local m = getmetatable(self)
         while m do
             if m == klass then return true end
-            m = m._base
+            m = m.super
         end
         return false
     end

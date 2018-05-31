@@ -1,14 +1,35 @@
-local class = require(LGUI_BASE_PATH .. ".libs.class")
+local Window = LGUI.class(LGUI.Element, function(self, parent)
+    self.super.init(self, parent)
 
-local Element = require(LGUI_BASE_PATH .. ".elements.element")
+    self.title = LGUI.Panel(self)
+    self.body = LGUI.Panel(self)
+    self.skin = nil
 
-local Window = class(Element, function(self, gui)
-    Element.init(self, gui)
+    self.height = 100
+    self.width = 100
+
+    self.childrenContainer = self.body
+    self:applySkin(LGUI.skin.Window)
 end)
 
-function Window:draw()
-    local posX, posY = self:getPosition(true)
-    self.gui.renderer.rectangle("fill", posX, posY, self.width, self.height, 0, 0)
+function Window:setDimensions(width, height)
+    self.title:setDimensions(width, self.skin.title.height)
+    self.body:setDimensions(width, height - self.skin.title.height)
 end
 
-return Window
+function Window:applySkin(skin)
+    self.skin = skin
+
+    -- Colors
+    self.title:applySkin(skin.title)
+    self.body:applySkin(skin.body)
+
+    -- Dimensions of titlebar
+    local width, height = self:getDimensions()
+    self:setDimensions(width, height)
+
+    -- Position body below titlebar
+    self.body:setPosition(0, self.title.height)
+end
+
+LGUI.Window = Window

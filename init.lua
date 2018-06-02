@@ -32,3 +32,28 @@ end
 LGUI.setSkin = function(skin)
     LGUI.skin = skin
 end
+
+-- Events are handled backwards, as LGUI._elements acts as z-index
+LGUI.onMousePressed = function(x, y, button)
+    for idx = #LGUI._elements, 1, -1 do
+        if LGUI._elements[idx]:handleMousePressed(x, y, button) then
+            return
+        end
+    end
+end
+
+LGUI.onMouseReleased = function(button)
+    for idx = #LGUI._elements, 1, -1 do
+        if LGUI._elements[idx]:handleMouseReleased(button) then
+            return
+        end
+    end
+end
+
+LGUI.onMouseMoved = function(x, y, dx, dy)
+    for idx = #LGUI._elements, 1, -1 do
+        if LGUI._elements[idx]:handleMouseMoved(x, y, dx, dy) then
+            return
+        end
+    end
+end

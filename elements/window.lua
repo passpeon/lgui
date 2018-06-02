@@ -5,6 +5,10 @@ local Window = LGUI.class(LGUI.Element, function(self, parent)
     self.body = LGUI.Panel(self)
     self.skin = nil
 
+    self.title.onMouseDrag = function(selfTitle, x, y, dx, dy, button)
+        self:setPosition(self.posX + dx, self.posY + dy)
+    end
+
     self.height = 100
     self.width = 100
 

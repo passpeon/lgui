@@ -173,11 +173,9 @@ function Element:handleMouseMoved(x, y, dx, dy)
     end
 
     -- Handle drag event
-    if self.hover and wasHover then
-        for button, state in ipairs(self.pressed) do
-            if state then
-                self:onMouseDrag(x, y, dx, dy, button)
-            end
+    for button, state in ipairs(self.pressed) do
+        if state then
+            self:onMouseDrag(x, y, dx, dy, button)
         end
     end
 

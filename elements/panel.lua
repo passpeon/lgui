@@ -21,11 +21,11 @@ function Panel:getColor()
     return self.color
 end
 
-function Panel:draw()
+function Panel:paint()
     local posX, posY = self:getAbsolutePosition()
 
     LGUI.renderer.setColor(self.color)
-    LGUI.renderer.rectangle("fill", posX, posY, self.width, self.height, 0, 0)
+    LGUI.renderer.rectangle(LGUI.Enums.RectangleFillMode.Fill, posX, posY, self.width, self.height, 0, 0)
 end
 
 LGUI.Panel = Panel

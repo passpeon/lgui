@@ -14,8 +14,11 @@ local Element = LGUI.class(function(self, parent)
     -- State
     self.hover = false
     self.pressed = {
-        [1] = false,
-        -- ToDo: Enums, all relevant mouse buttons
+        [LGUI.Enums.Mouse.Primary] = false,
+        [LGUI.Enums.Mouse.Secondary] = false,
+        [LGUI.Enums.Mouse.Wheel] = false,
+        [LGUI.Enums.Mouse.Mouse4] = false,
+        [LGUI.Enums.Mouse.Mouse5] = false
     }
 
     self:setParent(parent)
@@ -76,7 +79,13 @@ function Element:getDimensions()
     return self.width, self.height
 end
 
+function Element:paint()
+    -- User implementation
+end
+
 function Element:draw()
+    self:paint()
+
     for _, child in ipairs(self.children) do
         child:draw()
     end
@@ -91,7 +100,7 @@ function Element:onMouseLeave()
 end
 
 function Element:onMouseDown(button)
-    -- User implementation
+    -- ToDo
 end
 
 function Element:onMouseUp(button)
@@ -117,7 +126,7 @@ function Element:handleMousePressed(x, y, button)
 
     -- If not, we handle it
     if not childHandled then
-        self:onMouseDown(button)
+        self:onMouseDown(button) -- ToDo
         self.pressed[button] = true
 
         return true
